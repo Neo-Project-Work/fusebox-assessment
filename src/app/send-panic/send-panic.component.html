@@ -1,0 +1,13 @@
+<div class="send-panic-container">
+    <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
+        <input type="text" name="longitude" ngModel placeholder="longitude">
+        <br><br>
+        <input type="text" name="latitude" ngModel placeholder="latitude">
+        <br><br>
+        <input type="text" name="Panic_type" ngModel placeholder="Panic_type">
+        <br><br>
+        <input type="text" name="Details" ngModel placeholder="Details">
+        <br><br>
+        <button type="submit">Send</button>
+    </form>
+</div>
