@@ -1,0 +1,12 @@
+<div class="joinOuterContainer">
+  <div class="joinInnerContainer">
+    <h1 class="heading">Login</h1>
+    <div>
+      <input [(ngModel)] ="email" placeholder="Email" class="joinInput" type="text" />
+    </div>
+    <div>
+      <input [(ngModel)] ="password" placeholder="Password" class="joinInput mt-20" type="text" />
+    </div>
+    <button (click)="submitForm()" class="button mt-20">Login</button>
+  </div>
+</div>
