@@ -1,12 +1,14 @@
 <div class="joinOuterContainer">
   <div class="joinInnerContainer">
-    <h1 class="heading">Login</h1>
+    <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="formGroup" (ngSubmit)="submitForm()">
+    <h1 class="heading">Login Page</h1>
     <div>
-      <input [(ngModel)] ="email" placeholder="Email" class="joinInput" type="text" />
+      <input matInput placeholder="Email" formControlName="email" class="joinInput" type="text" />
     </div>
     <div>
-      <input [(ngModel)] ="password" placeholder="Password" class="joinInput mt-20" type="text" />
+        <input matInput placeholder="Password" formControlName="password" class="joinInput mt-20" type="text" />
     </div>
-    <button (click)="submitForm()" class="button mt-20">Login</button>
+    <button class="button mt-20">Login</button>
+  </form>
   </div>
 </div>

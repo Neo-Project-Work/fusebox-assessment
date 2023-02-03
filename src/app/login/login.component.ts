@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { TokenParams } from '../token-params';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +11,35 @@ import { TokenParams } from '../token-params';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  email!: string;
-  password!: string;
+  
 
+  formGroup: FormGroup = this.fb.group ({
+    email: new FormControl("", [Validators.required,
+      Validators.pattern(
+      '[a-zA-Z0-9.-]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}'
+    ),]),
+    password: new FormControl("", [Validators.required,Validators.minLength(8), Validators.pattern('^[+]?[0-9 ]+') ]),
+  });
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: {}, 
+  private router: Router, 
+  private authService: AuthService, 
+  private fb: FormBuilder,
+  private apiService: ApiService,
+  ) {}
 
   ngOnInit() {
-
+    if (isPlatformBrowser(this.platformId)) {}
   }
 
-  // TOD: To check if the form is filled in with neccessary requires
   submitForm() {
-    this.authService.login(this.email,this.password).subscribe( 
-      data => {
-        console.log(data);
-      },
-    )
-  };
-
-  
+    if(this.formGroup.valid) {
+      this.authService.login(this.formGroup.value).subscribe(res => {
+        if(res.status == 'success') {
+          console.log(res);
+          this.router.navigate(['/panic/send'])
+        }
+      })
+    }
+  }
 }

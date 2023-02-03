@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    Base_URL: "https://batman-assessment.fusebox-prod.co.za/api/v1/login",
+    Base_URL: "https://batman-assessment.fusebox-prod.co.za/api/v1/",
 };
