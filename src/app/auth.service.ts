@@ -1,64 +1,52 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { TokenParams } from './token-params';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { ApiService } from './api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  accessToken: string = "";
-  constructor(private http: HttpClient) { }
-
   private Base_API = environment.Base_URL;
+  
 
-  //login set req
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this._isLoggedIn$.asObservable();
 
-  login(email: string, password: string) {
-    var data = { email, password }
-    return this.http.post(this.Base_API, data, { headers: this.setHeader() } )
+  constructor(private http: HttpClient, private apiService:ApiService ) {
   }
 
 
-  // TODO:
-  // send a panic req  EndPoint: /panic/send
+  login(data:any) {
+    return this.apiService.login(data).pipe(
+      tap((response: any) => {
+        this._isLoggedIn$.next(true);
+        localStorage.setItem('token', response.data.api_access_token);
+      })
+    );
+  }
 
-  //cancel panic req  EndPoint: /panic/cancel
+  sendPanic(data: any): Observable<any> { 
+    return this.http.post(`${this.Base_API}panic/send`, data);
+  }
 
-  //get panic history  EndPoint: /panic/history
-   // create a if statement to check accesstoken
-  //  getPanicHistory () {
-  //   if(this.accessToken) {
-  //     this.setHeader().append('Authorization', 'Bearer' + this.accessToken)
-  //    }
-  //    return this.http.get(this.Base_API, { headers: this.setHeader()})
-  //  }
- 
+  cancelPanic(panic_id:string): Observable<any> {
+    return this.http.post(`${this.Base_API}panic/cancel`, panic_id);
+  }
 
 
-      // setup error handling
   private handleError(error: any) {
     if (error instanceof Response) {
-        let errMessage: any;
-        try {
-            errMessage = error.json().catch((err: any) => err);
-        } catch (err) {
-            errMessage = error.statusText;
-        }
-        return throwError(errMessage);
+      let errMessage: any;
+      try {
+        errMessage = error.json().catch((err: any) => err);
+      } catch (err) {
+        errMessage = error.statusText;
+      }
+      return throwError(errMessage);
     }
     return throwError(error || 'server error');
-  }
-
-
-  // set up headers
-  setHeader() {
-    return new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Accept': 'application/json',
-    });
   }
 }

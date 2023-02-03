@@ -1,9 +1,15 @@
 table, th ,td {
     border: 1px solid;
+	
+}
+ th {
+	background-color: darkblue;
+	color: white;
 }
 table {
     width: 60%;
     border: 2px solid;
+	margin-left: 20%;
 }
 th {
     height: 70px;
