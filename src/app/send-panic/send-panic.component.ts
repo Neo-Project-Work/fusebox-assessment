@@ -3,7 +3,7 @@ import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-
+import { ApiService } from '../api.service';
 @Component({
   selector: 'app-send-panic',
   templateUrl: './send-panic.component.html',
@@ -22,6 +22,7 @@ export class SendPanicComponent {
     private router: Router, 
     private authService: AuthService, 
     private fb: FormBuilder,
+    private apiService: ApiService,
   ) {}
 
   ngOnInit() {
@@ -38,4 +39,5 @@ export class SendPanicComponent {
       })
     }
   }
+
 }

@@ -13,18 +13,38 @@ export class ApiService {
   private Base_API = environment.Base_URL;
 
   login(data: any): Observable<any> {
-    return this.http.post(
-      `${this.Base_API}login`, data);
+    return this.http
+      .post(`${this.Base_API}login`, data)
+      .pipe(catchError(this.handleError));
   }
   sendPanic(data: any): Observable<any> {
-    return this.http.post(`${this.Base_API}panic/send`, data);
+    return this.http
+      .post(`${this.Base_API}panic/send`, data)
+      .pipe(catchError(this.handleError));
   }
 
-  cancelPanic(panic_id: string): Observable<any> {
-    return this.http.post(`${this.Base_API}panic/cancel`, panic_id);
+  cancelPanic(data: any): Observable<any> {
+    return this.http
+      .post(`${this.Base_API}panic/cancel`, data)
+      .pipe(catchError(this.handleError));
   }
 
   getPanicHistory(): Observable<any> {
-    return this.http.get(`${this.Base_API}panic/history`);
+    return this.http
+      .get(`${this.Base_API}panic/history`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any) {
+    if (error instanceof Response) {
+      let errMessage: any;
+      try {
+        errMessage = error.json().catch((err: any) => err);
+      } catch (err) {
+        errMessage = error.statusText;
+      }
+      return throwError(errMessage);
+    }
+    return throwError(error || 'server error');
   }
 }
