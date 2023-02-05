@@ -1,20 +1,54 @@
-table, th ,td {
-    border: 1px solid;
-	
+.panic-heading {
+    padding-top: 52px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    padding-right: 16%;
 }
- th {
-	background-color: darkblue;
-	color: white;
+ td {
+    border: 1px solid;
+
 }
 table {
-    width: 60%;
+    width: 100%;
     border: 2px solid;
-	margin-left: 20%;
+    border: 1px solid;
 }
 th {
     height: 70px;
+    border: 1px solid;
+    background-color: darkblue;
+    color: white;
+    text-align: center;
     
 }
 tbody {
     text-align: center;
+}
+
+.panic-history--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panic-history-table {
+    padding-right: 21px;
+    width: 100%;
+}
+.panic-cancel-section {
+    padding-left: 44px;
+}
+.panic-cancel-section {
+
+}
+.panic-cancel{
+
+    &-heading {
+        font-size: 24px;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    &-button {
+        padding-top: 14px;
+    }
 }

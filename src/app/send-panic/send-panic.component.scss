@@ -1,33 +1,15 @@
-// .send-panic-container {
-//     display: flex;
-//     flex-direction: column;
-// }
-html,
-body {
-  font-family: "Roboto", sans-serif;
-  padding: 0;
-  margin: 0;
-}
-
-#root {
-  height: 100vh;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 .joinOuterContainer {
-  display: flex;
-  justify-content: center;
   text-align: center;
-  height: 100vh;
-  align-items: center;
+  height: 900px;
   background-color: #1a1a1d;
 }
 
 .joinInnerContainer {
-  width: 20%;
+  padding-top: 5%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .joinInput {
@@ -72,25 +54,7 @@ body {
 button:focus {
   outline: 0;
 }
-
-
-table, th ,td {
-  border: 1px solid;
+.testing {
+  background-color: red;
+  height: 100vh;
 }
-table {
-  width: 60%;
-  border: 2px solid;
-}
-th {
-  height: 70px;
-  
-}
-tbody {
-  text-align: center;
-}
-.ui .container {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: column-reverse;
-} 

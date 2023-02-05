@@ -1,29 +1,48 @@
 <div class="ui container">
-  <table>
-    <caption>
-      Panic History Data
-    </caption>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Longitude</th>
-        <th>Latitude</th>
-        <th>Panic_type</th>
-        <th>Details</th>
-        <th>Created_at</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let k of panicHistory[0]">
-        <td>{{ k.id }}</td>
-        <td>{{ k.longitude }}</td>
-        <td>{{ k.longitude }}</td>
-        <td>{{ k.panic_type }}</td>
-        <td>{{ k.details }}</td>
-        <td>{{ k.created_at }}</td>
-        <td>{{ k.status.name }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="panic-heading">
+    Panic History Data
+  </div>
+  <div class="panic-history--container">
+    <div class="panic-history-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Panic_type</th>
+            <th>Details</th>
+            <th>Created_at</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let k of panicHistory[0]">
+            <td id="panic_id">{{ k.id }}</td>
+            <td>{{ k.longitude }}</td>
+            <td>{{ k.longitude }}</td>
+            <td>{{ k.panic_type }}</td>
+            <td>{{ k.details }}</td>
+            <td>{{ k.created_at | date }}</td>
+            <td>{{ k.status.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+   
+     <!-- Cancel Button  -->
+    <div class="panic-cancel-section">
+      <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="formGroup" (ngSubmit)="cancelPanic()">
+        <h1 class="panic-cancel-heading">Cancel Panic</h1>
+        <div class="panic-canel-input">
+          <input matInput placeholder="panic_id" formControlName="panic_id" class="joinInput" type="text" />
+        </div>
+        <div class="panic-cancel-button">
+          <button class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
