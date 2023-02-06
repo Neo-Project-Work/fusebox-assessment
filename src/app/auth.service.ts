@@ -36,17 +36,4 @@ export class AuthService {
     return this.http.post(`${this.Base_API}panic/cancel`, panic_id);
   }
 
-
-  private handleError(error: any) {
-    if (error instanceof Response) {
-      let errMessage: any;
-      try {
-        errMessage = error.json().catch((err: any) => err);
-      } catch (err) {
-        errMessage = error.statusText;
-      }
-      return throwError(errMessage);
-    }
-    return throwError(error || 'server error');
-  }
 }

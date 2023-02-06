@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/panic/send'])
         }
       })
+    }else {
+      alert ('Please Enter Correct Details');
     }
   }
 }
