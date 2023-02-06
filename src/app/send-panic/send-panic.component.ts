@@ -13,8 +13,8 @@ export class SendPanicComponent {
   formGroup: FormGroup = this.fb.group ({
     longitude: new FormControl("", [Validators.required]),
     latitude: new FormControl("", [Validators.required]),
-    panic_type: new FormControl("", [Validators.required]),
-    details: new FormControl("", [Validators.required]),
+    panic_type: new FormControl("",),
+    details: new FormControl("",),
   });
 
 
@@ -37,6 +37,8 @@ export class SendPanicComponent {
           this.router.navigate(['/panic/history'])
         }
       })
+    }else{
+      alert('Please Enter the correct field for Longitude and Latitude ')
     }
   }
 

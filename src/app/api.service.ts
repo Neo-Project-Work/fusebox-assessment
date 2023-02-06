@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
+  
   constructor(private http: HttpClient) {}
 
   private Base_API = environment.Base_URL;
@@ -17,6 +18,7 @@ export class ApiService {
       .post(`${this.Base_API}login`, data)
       .pipe(catchError(this.handleError));
   }
+
   sendPanic(data: any): Observable<any> {
     return this.http
       .post(`${this.Base_API}panic/send`, data)
